@@ -26,10 +26,6 @@ for tab, result in zip(tabs, data):
             content_html = f"""
             <div style="
                 background-color: #f9f9f9;
-                padding: 15px;
-                border-radius: 8px;
-                border: 1px solid #ddd;
-                white-space: pre-wrap;
             ">
             {result['llm_result']}
             </div>
