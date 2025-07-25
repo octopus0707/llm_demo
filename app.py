@@ -7,6 +7,9 @@ with open("./llm_similarity_results.json", 'r') as file:
 st.set_page_config(page_title="LLM 進行專利相似度比對分析", layout="wide")
 st.title("專利相似度比對分析")
 
+nums = len(data)
+
+tab_titles = [f"example {i}" for i in range(nums)]
 # 產生 tab 名稱
 tab_titles = [f"{item['target']} v.s. {item['id']}" for item in data]
 
