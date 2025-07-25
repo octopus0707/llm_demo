@@ -14,9 +14,6 @@ example_results = [
    - 專利一內容
    - 專利二內容
    - 原因說明
-
-2. **比較點二**
-   ...
 """
     },
     {
@@ -25,13 +22,13 @@ example_results = [
         "llm_result": """
 ### 專利比對說明
 
-**專利一（裝置）段落：**
+**專利一段落：**  
 - 裝置內容
 
-**專利二（方法）段落：**
+**專利二段落：**  
 - 方法內容
 
-**總結：**
+**總結：**  
 兩篇專利都處理早期解碼與功率管理...
 """
     }
@@ -40,17 +37,15 @@ example_results = [
 st.set_page_config(page_title="專利比對展示", layout="wide")
 st.title("📄 多筆專利比對分析")
 
-# 產生 tab 名稱
-tab_titles = [f"{item['id']} (target: {item['target']})" for item in example_results]
-
-# 建立 tabs
-tabs = st.tabs(tab_titles)
-
+# 建立下拉選單項目
 options = [f"{item['id']} (target: {item['target']})" for item in example_results]
-selected = st.selectbox("請選擇一筆資料查看：", options)
+selected_label = st.selectbox("請選擇一筆專利比對結果：", options)
 
-for item in example_results:
-    label = f"{item['id']} (target: {item['target']})"
-    if label == selected:
-        st.markdown(item["llm_result"], unsafe_allow_html=True)
+# 找到對應內容
+selected_result = next((item for item in example_results 
+                        if f"{item['id']} (target: {item['target']})" == selected_label), None)
 
+# 顯示內容
+if selected_result:
+    st.subheader(f"📌 專利編號：{selected_result['id']}")
+    st.markdown(selected_result["llm_result"], unsafe_allow_html=True)
