@@ -1,6 +1,23 @@
 import streamlit as st
 import json
 
+st.markdown("""
+<style>
+/* 改 expander 標題背景 */
+div[role="button"] > div:first-child {
+    background-color: #d0f0ff !important;  /* 淺藍色 */
+    border-radius: 8px 8px 0 0 !important;
+}
+
+/* 改 expander 內容區背景 */
+section[aria-expanded="true"] > div[style*="flex-direction: column"] {
+    background-color: #e6f7ff !important;  /* 更淺藍 */
+    border-radius: 0 0 8px 8px !important;
+    padding: 15px;
+}
+</style>
+""", unsafe_allow_html=True)
+
 with open("./llm_similarity_results.json", 'r') as file:
     data = json.load(file)
 
@@ -22,14 +39,4 @@ for tab, result in zip(tabs, data):
         st.markdown("- **LLM 回答：**")
 
         with st.expander("點我展開/收合 LLM 回答"):
-            # 用 HTML 包一層加背景
-            content_html = f"""
-            <div style="
-                background-color: #f9f9f9;
-                padding: 15px;
-                border-radius: 8px;
-            ">
-            {result['llm_result']}
-            </div>
-            """
-            st.markdown(content_html, unsafe_allow_html=True)
+            st.markdown(result['llm_result'])
