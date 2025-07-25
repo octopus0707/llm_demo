@@ -46,8 +46,11 @@ tab_titles = [f"{item['id']} (target: {item['target']})" for item in example_res
 # 建立 tabs
 tabs = st.tabs(tab_titles)
 
-# 對應每個 tab 顯示內容
-for tab, result in zip(tabs, example_results):
-    with tab:
-        st.subheader(f"📌 專利編號：{result['id']}")
-        st.markdown(result["llm_result"], unsafe_allow_html=True)
+options = [f"{item['id']} (target: {item['target']})" for item in example_results]
+selected = st.selectbox("請選擇一筆資料查看：", options)
+
+for item in example_results:
+    label = f"{item['id']} (target: {item['target']})"
+    if label == selected:
+        st.markdown(item["llm_result"], unsafe_allow_html=True)
+
