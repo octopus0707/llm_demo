@@ -10,8 +10,6 @@ st.title("專利相似度比對分析")
 nums = len(data)
 
 tab_titles = [f"example {i}" for i in range(nums)]
-# 產生 tab 名稱
-tab_titles = [f"{item['target']} v.s. {item['id']}" for item in data]
 
 # 建立 tabs
 tabs = st.tabs(tab_titles)
