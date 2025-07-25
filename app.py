@@ -18,4 +18,4 @@ for tab, result in zip(tabs, data):
     with tab:
         st.markdown(f"- 📌 本國專利號：{result['target']}")
         st.markdown(f"- 📌 美國專利號：{result['id']}")
-        st.markdown(f"- LLM 回答：\n{result['llm_answer']}", unsafe_allow_html=True)
+        st.markdown(f"- LLM 回答：\n{result['llm_result']}", unsafe_allow_html=True)
