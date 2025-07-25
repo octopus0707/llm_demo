@@ -1,22 +1,22 @@
 import streamlit as st
 import json
 
-st.markdown("""
-<style>
-/* 改 expander 標題背景 */
-div[role="button"] > div:first-child {
-    background-color: #d0f0ff !important;  /* 淺藍色 */
-    border-radius: 8px 8px 0 0 !important;
-}
-
-/* 改 expander 內容區背景 */
-section[aria-expanded="true"] > div[style*="flex-direction: column"] {
-    background-color: #e6f7ff !important;  /* 更淺藍 */
-    border-radius: 0 0 8px 8px !important;
-    padding: 15px;
-}
-</style>
-""", unsafe_allow_html=True)
+# Custom CSS 
+st.markdown(
+    '''
+    <style>
+    .streamlit-expanderHeader {
+        background-color: #e6f7ff;
+        color: black; # Adjust this for expander header color
+    }
+    .streamlit-expanderContent {
+        background-color: #e6f7ff;
+        color: black; # Expander content color
+    }
+    </style>
+    ''',
+    unsafe_allow_html=True
+)
 
 with open("./llm_similarity_results.json", 'r') as file:
     data = json.load(file)
