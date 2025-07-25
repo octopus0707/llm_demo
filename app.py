@@ -20,7 +20,5 @@ for tab, result in zip(tabs, data):
         st.markdown(f"- 本國專利號：{result['target']}")
         st.markdown(f"- 美國專利號：{result['id']}")
         # bullet tag + expander
-        st.markdown("- LLM 回答：")
-
-        with st.expander("點我展開/收合 LLM 回答"):
+        with st.expander("AI 回應", expanded=True):
             st.markdown(result['llm_result'])
