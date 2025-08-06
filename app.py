@@ -2,7 +2,7 @@ import streamlit as st
 import json
 
 # 在側邊欄選擇模型
-model_option = st.sidebar.selectbox(
+model_option = st.selectbox(
     "選擇 prompt 結果",
     ("原始 prompt", "修正 prompt")
 )
