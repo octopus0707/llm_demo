@@ -1,7 +1,19 @@
 import streamlit as st
 import json
 
-with open("./llm_similarity_results.json", 'r') as file:
+# 在側邊欄選擇模型
+model_option = st.sidebar.selectbox(
+    "選擇 prompt 結果",
+    ("原始 prompt", "修正 prompt")
+)
+
+# 根據選擇載入不同的檔案
+if model_option == "原始 prompt":
+    file_path = "./llm_similarity_results.json"
+else:
+    file_path = "./llm_similarity_results_0805.json"
+
+with open(file_path, 'r') as file:
     data = json.load(file)
 
 st.set_page_config(page_title="LLM 進行專利相似度比對分析", layout="wide")
