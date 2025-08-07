@@ -3,7 +3,7 @@ import json
 
 model_option = st.selectbox(
     "選擇 prompt 結果",
-    ("原始 prompt", "修正 prompt")
+    ("原始 prompt", "修正版 prompt")
 )
 
 if model_option == "原始 prompt":
