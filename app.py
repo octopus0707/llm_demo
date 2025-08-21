@@ -3,13 +3,15 @@ import json
 
 model_option = st.selectbox(
     "選擇 prompt 結果",
-    ("原始 prompt", "修正版 prompt")
+    ("原始 prompt", "修正版 prompt", "Embedding top 50 + LLM")
 )
 
 if model_option == "原始 prompt":
     file_path = "./llm_similarity_results.json"
-else:
+elif model_option == "修正版 prompt":
     file_path = "./llm_similarity_results_0807.json"
+else:
+    file_path = "./emb+llm.json"
 
 with open(file_path, 'r') as file:
     data = json.load(file)
@@ -32,5 +34,16 @@ for tab, result in zip(tabs, data):
         # bullet tag + expander
         st.markdown("- LLM 回答：")
 
-        with st.expander("點我展開/收合 LLM 回答", expanded=True):
-            st.markdown(result['llm_result'])
+        if type(result['llm_result']) == str:
+            with st.expander("點我展開/收合 LLM 回答", expanded=True):
+                st.markdown(result['llm_result'])
+        else:
+            for i in result['llm_result']:
+                
+                with st.expander(f"點我展開/收合 LLM 回答", expanded=False):
+                    st.markdown(f"> 專利一：{i['target_sent']}")
+                    count = 1
+                    for j in i['sents']:
+                        st.markdown(f"  - 語句 {count} : {j}")
+                        count += 1
+                    st.markdown(i['llm'])
